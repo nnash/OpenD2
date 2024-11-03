@@ -1,20 +1,24 @@
-file(GLOB_RECURSE D2CLIENT_FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.c"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+if (NOT SHARED_SRC)
+  message(FATAL_ERROR "SHARED_SRC must be set")
+endif()
+
+message(STATUS "Setting up D2Client library")
+
+set(D2Client_SRC
+    D2Client_Helpers.cpp
+    D2Client_Packets.cpp
+    D2Client.cpp
+    D2Client.hpp
+    D2ClientDebug.cpp
+    D2ClientDebug.hpp
 )
 
-source_group("UI/Menus" "${CMAKE_CURRENT_SOURCE_DIR}/UI/Menus")
-source_group("UI/Panels" "${CMAKE_CURRENT_SOURCE_DIR}/UI/Panels")
-source_group("UI/Widgets" "${CMAKE_CURRENT_SOURCE_DIR}/UI/Widgets")
-source_group("UI" "${CMAKE_CURRENT_SOURCE_DIR}/UI")
-source_group("Shared" "${SHARED_SRC}")
+source_group("Client" FILES ${D2Client_SRC})
 
-add_library(D2Client SHARED
-    "${D2CLIENT_FILES}"
-    "${SHARED_SRC}"
-)
+add_library(D2Client SHARED ${D2Client_SRC} ${SHARED_SRC})
+set_target_properties(D2Client PROPERTIES OUTPUT_NAME D2Client)
+set_target_properties(D2Client PROPERTIES LINKER_LANGUAGE CXX)
+
 set_target_properties(D2Client 
     PROPERTIES 
     OUTPUT_NAME D2Client
@@ -25,7 +29,6 @@ set_target_properties(D2Client
     LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/Release"
     RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/Release"
 )
-set_target_properties(D2Client PROPERTIES LINKER_LANGUAGE CXX)
 
 target_link_libraries(D2Client ${STATIC_LIBRARIES} D2Common)
-target_compile_definitions(D2Client PUBLIC D2CLIENT)
+target_compile_definitions(D2Client PUBLIC D2Client)
