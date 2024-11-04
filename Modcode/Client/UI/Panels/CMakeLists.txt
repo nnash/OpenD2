@@ -20,3 +20,8 @@ set(D2CLIENT_UI_PANELS_FILES
     TCPIPMain.cpp
     TCPIPMain.hpp
 )
+
+set(D2Client_SRC
+    "${D2Client_SRC}"
+    "${D2CLIENT_UI_PANELS_FILES}"
+)

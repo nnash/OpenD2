@@ -24,3 +24,9 @@ set(D2CLIENT_UI_MENUS_FILES
     Trademark.cpp
     Trademark.hpp
 )
+
+
+set(D2Client_SRC
+    "${D2Client_SRC}"
+    "${D2CLIENT_UI_MENUS_FILES}"
+)

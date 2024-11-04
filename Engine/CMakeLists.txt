@@ -86,6 +86,7 @@ else()
   source_group("Engine" FILES ${ENGINE_SRC})
 endif()
 
+find_package(SDL2_mixer REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(glew REQUIRED)
 find_package(glfw3 REQUIRED)
@@ -98,6 +99,7 @@ set_target_properties(game PROPERTIES LINKER_LANGUAGE CXX)
 
 target_link_libraries(game 
                       PRIVATE
+                      SDL2_mixer::SDL2_mixer
                       SDL2::SDL2
                       GLEW::GLEW
                       glfw

@@ -1,5 +1,5 @@
 #include "Bitmap.hpp"
-#include <Windows.h>
+// #include <Windows.h>
 #include <stdio.h>
 
 void Bitmap::Blit(Bitmap* to, Bitmap* from, int toX, int toY, int fromX, int fromY, int w, int h)

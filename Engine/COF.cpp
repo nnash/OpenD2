@@ -2,6 +2,8 @@
 #include "Logging.hpp"
 #include "FileSystem.hpp"
 
+#include <stdio.h>
+
 #define MAX_COFFILE_NAMELEN	16
 #define MAX_COF_TYPELEN		16
 #define MAX_COF_HASHLEN		2048

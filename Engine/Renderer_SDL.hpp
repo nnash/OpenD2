@@ -3,6 +3,8 @@
 #include "DC6.hpp"
 #include "TBL_Font.hpp"
 
+#include <SDL.h>
+
 #define MAX_SDL_DRAWCOMMANDS_PER_FRAME	0x1000
 #define MAX_SDL_TEXTURECACHE_SIZE		0x100
 #define MAX_SDL_ANIMCACHE_SIZE			0x100

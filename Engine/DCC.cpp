@@ -1,7 +1,7 @@
 #include "DCC.hpp"
 #include "Logging.hpp"
 #include "FileSystem.hpp"
-#include <Windows.h>
+// #include <Windows.h>
 
 #define MAX_DCC_HASH		32768
 #define MAX_DCC_NAMELEN		32

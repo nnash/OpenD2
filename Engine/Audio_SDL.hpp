@@ -1,6 +1,7 @@
 #pragma once
 #include "Diablo2.hpp"
-#include "../Libraries/sdl/SDL_mixer.h"
+
+#include <SDL_mixer.h>
 
 #define MAX_SDL_SOUNDFILES	4096
 

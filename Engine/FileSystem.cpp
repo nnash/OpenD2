@@ -3,7 +3,8 @@
 #include "FileSystem_MPQ.hpp"
 #include "MPQ.hpp"
 #include "Platform.hpp"
-#include "../Libraries/sdl/SDL_thread.h"
+
+#include <SDL.h>
 #include <assert.h>
 
 /*

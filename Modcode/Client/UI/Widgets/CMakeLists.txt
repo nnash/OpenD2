@@ -18,3 +18,8 @@ set(D2CLIENT_UI_WIDGETS_FILES
     TextEntry.cpp
     TextEntry.hpp
 )
+
+set(D2Client_SRC
+    "${D2Client_SRC}"
+    "${D2CLIENT_UI_WIDGETS_FILES}"
+)

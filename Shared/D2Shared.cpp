@@ -551,7 +551,7 @@ namespace D2Lib
 	*	Hashes a char16_t. Based on SVR's code. Compatible with TBL files for lookup.
 	*	Note that this uses a different algorithm than D2Lib::strhash.
 	*/
-	DWORD qstrhash(char16_t* str, size_t dwLen, DWORD dwMaxHashSize)
+	DWORD qstrhash(const char16_t* str, size_t dwLen, DWORD dwMaxHashSize)
 	{
 		DWORD hash = 0;
 		char16_t curChar;

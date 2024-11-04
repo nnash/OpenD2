@@ -3,6 +3,8 @@
 #include "FileSystem.hpp"
 #include "Logging.hpp"
 
+#include <stdio.h>
+
 #define INI_MAX_SECTION_NAMELEN		16
 #define INI_MAX_KEY_NAMELEN			64
 #define INI_MAX_SECTIONS			16
@@ -154,6 +156,7 @@ namespace INI
 #ifdef _WIN32
 				pField->fieldValues.bValue = *(bool*)((BYTE*)pData + pCurrent->nOffset);
 #else
+// TODO cast pData to correct type
 				pField->fieldValues.bValue = *(bool*)(pData + pCurrent->nOffset);
 #endif
 				

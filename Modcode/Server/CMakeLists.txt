@@ -1,6 +1,3 @@
-if (NOT SHARED_SRC)
-  message(FATAL_ERROR "SHARED_SRC must be set")
-endif()
 
 message(STATUS "Setting up D2Server library")
 
@@ -11,7 +8,7 @@ set(D2SERVER_SRC
 
 source_group("Server" FILES ${D2SERVER_SRC})
 
-add_library(D2Server SHARED ${D2SERVER_SRC} ${SHARED_SRC})
+add_library(D2Server SHARED ${D2SERVER_SRC})
 set_target_properties(D2Server PROPERTIES OUTPUT_NAME D2Server)
 set_target_properties(D2Server PROPERTIES LINKER_LANGUAGE CXX)
 
@@ -26,5 +23,5 @@ set_target_properties(D2Server
     RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/Release"
 )
 
-target_link_libraries(D2Server ${STATIC_LIBRARIES} D2Common)
+target_link_libraries(D2Server ${STATIC_LIBRARIES} D2Common D2Shared)
 target_compile_definitions(D2Server PUBLIC D2SERVER)

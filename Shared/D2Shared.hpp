@@ -961,7 +961,7 @@ namespace D2Lib
 	// Format a UTF-16 string
 	int qsnprintf(char16_t* buffer, size_t bufferCount, const char16_t* format, ...);
 	// Compute hash of UTF-16 string
-	DWORD qstrhash(char16_t* str, size_t dwLen, DWORD dwMaxHashSize);
+	DWORD qstrhash(const char16_t* str, size_t dwLen, DWORD dwMaxHashSize);
 
 	// Random Numbers
 	DWORD rand();

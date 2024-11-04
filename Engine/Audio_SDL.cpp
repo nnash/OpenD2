@@ -3,6 +3,8 @@
 #include "FileSystem.hpp"
 #include "Logging.hpp"
 
+#include <SDL.h>
+
 namespace Audio_SDL
 {
 	static HashMap<char, AudioChunk, 128, MAX_D2PATH> gpSoundCache;

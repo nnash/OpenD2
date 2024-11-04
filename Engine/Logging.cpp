@@ -4,7 +4,9 @@
 #include "Platform.hpp"
 #include "Window.hpp"
 #include <time.h>
+
 #include <cstdio>
+#include <SDL.h>
 
 ///////////////////////////////////////////////////////////
 //
