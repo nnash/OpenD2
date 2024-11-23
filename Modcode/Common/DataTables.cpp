@@ -1,5 +1,7 @@
 #include "D2Common.hpp"
 
+#include <cstdio>
+
 D2COMMONAPI D2DataTablesStrc* sgptDataTables;
 
 static D2DataTablesStrc gDataTables{ 0 };

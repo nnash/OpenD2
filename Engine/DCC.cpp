@@ -980,10 +980,10 @@ namespace DCC
 			dccDir->pb = nullptr;
 		}
 
-		Log_WarnAssertReturn(dccDir->dwEqualCellStreamSize == dccDir->EqualCellStream.currentBitNum);
-		Log_WarnAssertReturn(dccDir->dwPixelMaskStreamSize == dccDir->PixelMaskStream.currentBitNum);
-		Log_WarnAssertReturn(dccDir->dwEncodingStreamSize == dccDir->EncodingTypeStream.currentBitNum);
-		Log_WarnAssertReturn(dccDir->PixelCodeDisplacementStream.currentBitNum + 7 >= dccDir->PixelCodeDisplacementStream.size);
+		Log_WarnAssertVoidReturn(dccDir->dwEqualCellStreamSize == dccDir->EqualCellStream.currentBitNum);
+		Log_WarnAssertVoidReturn(dccDir->dwPixelMaskStreamSize == dccDir->PixelMaskStream.currentBitNum);
+		Log_WarnAssertVoidReturn(dccDir->dwEncodingStreamSize == dccDir->EncodingTypeStream.currentBitNum);
+		Log_WarnAssertVoidReturn(dccDir->PixelCodeDisplacementStream.currentBitNum + 7 >= dccDir->PixelCodeDisplacementStream.size);
 	}
 
 	void DecodeDirection(DCCFile* animation, uint32_t direction, DCCDirectionAllocateCallback alloc, DCCDirectionFrameDecodeCallback decode)

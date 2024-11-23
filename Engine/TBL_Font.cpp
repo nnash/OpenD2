@@ -1,6 +1,8 @@
 #include "TBL_Font.hpp"
 #include "FileSystem.hpp"
 
+#include <cstdio>
+
 ////////////////////////////////////////////////////////
 //
 //	Font-Based .TBL files store information about game fonts.

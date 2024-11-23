@@ -1,4 +1,5 @@
 #include "Diablo2.hpp"
+#include <SDL.h>
 
 #define MAX_INPUT_COMMANDS	512		// there is no reason we should ever go higher than this
 

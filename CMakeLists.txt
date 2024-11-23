@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(OpenD2)
+project(OpenD2 CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -12,11 +12,6 @@ set(SHARED_SRC "" CACHE INTERNAL "")
 
 # Add shared files
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Shared")
-
-# Build game.exe
-if(BUILD_GAME)
-	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine")
-endif()
 
 # Build D2Common.dll
 if(BUILD_D2CLIENT OR BUILD_D2SERVER)
@@ -32,10 +27,14 @@ if(BUILD_D2CLIENT)
 	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Modcode/Client")
 endif()
 
-
 # Build D2Server.dll
 if(BUILD_D2SERVER)
 	message(STATUS "Including D2Server.dll files")
 
   add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Modcode/Server")
+endif()
+
+# Build game.exe
+if(BUILD_GAME)
+	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine")
 endif()

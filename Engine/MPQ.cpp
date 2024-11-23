@@ -593,7 +593,7 @@ namespace MPQ
 		Info.pbOutBuffEnd = (unsigned char *)pOutBuffer + *dwOutRead;
 
 		// Do the decompression
-		explode(ReadPKWare, WritePKWare, work_buf, &Info);
+		::explode(ReadPKWare, WritePKWare, work_buf, &Info);
 
 		// If PKLIB is unable to decompress the data, return 0;
 		if (Info.pbOutBuff == pOutBuffer)

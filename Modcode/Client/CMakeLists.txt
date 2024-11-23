@@ -30,4 +30,4 @@ set_target_properties(D2Client
 )
 
 target_link_libraries(D2Client ${STATIC_LIBRARIES} D2Common D2Shared)
-target_compile_definitions(D2Client PUBLIC D2Client)
+target_compile_definitions(D2Client PUBLIC D2CLIENT)

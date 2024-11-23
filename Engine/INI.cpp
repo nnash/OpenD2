@@ -156,8 +156,8 @@ namespace INI
 #ifdef _WIN32
 				pField->fieldValues.bValue = *(bool*)((BYTE*)pData + pCurrent->nOffset);
 #else
-// TODO cast pData to correct type
-				pField->fieldValues.bValue = *(bool*)(pData + pCurrent->nOffset);
+// Nash changed this to make compiler happy
+				pField->fieldValues.bValue = *(bool*)((BYTE*)pData + pCurrent->nOffset);
 #endif
 				
 				pField->fieldType = INI_BOOL;
@@ -173,7 +173,7 @@ namespace INI
 #ifdef _WIN32
 				pField->fieldValues.nValue = *(int*)((BYTE*)pData + pCurrent->nOffset);
 #else
-				pField->fieldValues.nValue = *(int*)(pData + pCurrent->nOffset);
+				pField->fieldValues.nValue = *(int*)((BYTE*)pData + pCurrent->nOffset);
 #endif
 				pField->fieldType = INI_INTEGER;
 				if (pField->fieldValues.nValue == pCurrent->dwDefault)
@@ -186,7 +186,7 @@ namespace INI
 #ifdef _WIN32
 				D2Lib::strncpyz(pField->fieldValues.szValue, (char*)((BYTE*)pData + pCurrent->nOffset), INI_MAX_STRINGLEN);
 #else
-				D2Lib::strncpyz(pField->fieldValues.szValue, (char*)(pData + pCurrent->nOffset), INI_MAX_STRINGLEN);
+				D2Lib::strncpyz(pField->fieldValues.szValue, (char*)((BYTE*)pData + pCurrent->nOffset), INI_MAX_STRINGLEN);
 #endif
 				pField->fieldType = INI_STRING;
 				if (pField->fieldValues.szValue[0] == '\0')

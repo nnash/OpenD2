@@ -2,6 +2,8 @@
 #include "FileSystem.hpp"
 #include "Logging.hpp"
 
+#include <cstdio>
+
 ////////////////////////////////////////////////////////
 //
 //	Text-Based .TBL files store the game's strings.

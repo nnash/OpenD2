@@ -117,7 +117,7 @@ DS1File::DS1File(const char* path) :
 	fs_handle f;
 	size_t fileSize = FS::Open(path, &f, FS_READ, true);
 	BYTE* buffer = (BYTE*)malloc(fileSize);
-	Log_ErrorAssertReturn(buffer);
+	Log_ErrorAssertVoidReturn(buffer);
 	FS::Read(f, buffer, 1, fileSize);
 	FS::CloseFile(f);
 

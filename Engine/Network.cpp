@@ -1,7 +1,8 @@
 #include "../Shared/D2Packets.hpp"
 #include "Diablo2.hpp"
 #include "Logging.hpp"
-#include "../Libraries/sdl/SDL_net.h"
+
+#include <SDL_net.h>
 
 #define MAX_PACKET_SIZE	512
 

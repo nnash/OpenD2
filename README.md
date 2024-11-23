@@ -82,3 +82,10 @@ The serverside is responsible for quest management, AI, and more. Ideally, this 
 
 #### Clientside (D2Client.dll)
 The clientside is responsible for client logic, mostly with drawing the menus and sprites.
+
+## Conan
+build for linux:
+`conan install ./conan --output-folder=build/conan --profile:build=./conan/default --profile:host=./conan/default --build=missing`
+
+
+fix for void * in 64 bit: https://stackoverflow.com/questions/21232460/disabling-cast-from-pointer-to-smaller-type-uint32-t-error-in-clang

@@ -186,13 +186,13 @@ void GLRenderObject::Render()
 			else if (component->AreGraphicsLoaded(direction))
 			{
 				// they're loaded, just get them
-				texture = (GLuint)component->GetLoadedGraphicsData(direction);
+				texture = *(GLuint*)component->GetLoadedGraphicsData(direction);
 			}
 			else
 			{
 				// not loaded, get it!
 				component->SetDirectionCount(token->GetNumberOfDirections(mode, hitclass));
-				texture = (GLuint)component->LoadSingleDirection(direction,
+				texture = *(GLuint*)component->LoadSingleDirection(direction,
 					/*                  animation allocate callback               */
 					[](unsigned int directionWidth, unsigned int directionHeight) -> void* {
 						GLuint returnResult;
@@ -211,7 +211,7 @@ void GLRenderObject::Render()
 					},
 					/*                  frame decode callback               */
 					[](void* pixels, void* extraData, int32_t frameNum, int32_t frameX, int32_t frameY, int32_t frameW, int32_t frameH) {
-						GLuint texture = (GLuint)extraData;
+						GLuint texture = *(GLuint*)extraData;
 
 						glActiveTexture(GL_TEXTURE0);
 						glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -240,8 +240,8 @@ void GLRenderObject::Render()
 			GLfloat drawCoords[] = {
 				screenCoord[0] + offsetX,
 				screenCoord[1] - frameHeight + offsetY,
-				frameWidth,
-				frameHeight - 1
+				static_cast<GLfloat>(frameWidth),
+				static_cast<GLfloat>(frameHeight) - 1
 			};
 
 			// Set GPU variables and draw it!
@@ -343,8 +343,8 @@ void GLRenderObject::Render()
 
 		GLfloat drawCoords[] = { screenCoord[0] + offsetX,
 			screenCoord[1] + 400 - frameHeight + offsetY, // offset is supposed to be additive downwards, perhaps..?
-			frameWidth,
-			frameHeight - 1
+			static_cast<GLfloat>(frameWidth),
+			static_cast<GLfloat>(frameHeight) - 1
 		};
 
 		uint32_t x, y, w, h;
@@ -423,7 +423,7 @@ void GLRenderObject::AttachTextureResource(IGraphicsReference* handle, int32_t f
 
 	if(handle->AreGraphicsLoaded() && handle->GetLoadedGraphicsFrame() == frame)
 	{
-		texture = (unsigned int)handle->GetLoadedGraphicsData();
+		texture = *(unsigned int*)handle->GetLoadedGraphicsData();
 	}
 	else
 	{
@@ -476,7 +476,7 @@ void GLRenderObject::AttachCompositeTextureResource(IGraphicsReference* handle,
 
 	if(startFrame == 0 && endFrame == -1 && handle->AreGraphicsLoaded())
 	{
-		texture = (unsigned int)handle->GetLoadedGraphicsData();
+		texture = *(unsigned int*)handle->GetLoadedGraphicsData();
 	}
 	else
 	{
@@ -531,7 +531,7 @@ void GLRenderObject::AttachAnimationResource(IGraphicsReference* handle, bool bR
 
 	if(handle->AreGraphicsLoaded())
 	{
-		texture = (unsigned int)handle->GetLoadedGraphicsData();
+		texture = *(unsigned int*)handle->GetLoadedGraphicsData();
 	}
 	else
 	{
@@ -586,7 +586,7 @@ void GLRenderObject::AttachFontResource(IGraphicsReference* handle)
 
 	if(handle->AreGraphicsLoaded())
 	{
-		texture = (unsigned int)handle->GetLoadedGraphicsData();
+		texture = *(unsigned int*)handle->GetLoadedGraphicsData();
 	}
 	else
 	{
@@ -632,7 +632,7 @@ void GLRenderObject::AttachTileResource(IGraphicsReference* handle, int tileInde
 
 	if (handle->AreGraphicsLoaded())
 	{
-		texture = (unsigned int)handle->GetLoadedGraphicsData();
+		texture = *(unsigned int*)handle->GetLoadedGraphicsData();
 	}
 	else
 	{
@@ -1470,6 +1470,6 @@ void Renderer_GL::Clear()
 
 void Renderer_GL::DeleteLoadedGraphicsData(void* loadedData, class IGraphicsReference* ref)
 {
-	unsigned int texture = (unsigned int)loadedData;
+	unsigned int texture = *(unsigned int*)loadedData;
 	glDeleteTextures(1, &texture);
 }

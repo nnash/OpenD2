@@ -85,10 +85,10 @@ typedef uint32_t DWORD;
 typedef uint16_t WORD;
 typedef uint8_t BYTE;
 #else
-typedef unsigned long long	QWORD;
-typedef unsigned long		DWORD;
-typedef unsigned short		WORD;
-typedef unsigned char		BYTE;
+typedef unsigned long long QWORD;
+typedef unsigned long	DWORD;
+typedef unsigned short WORD;
+typedef unsigned char BYTE;
 #endif
 
 #define LOWORD(_dw)     ((WORD)(((DWORD*)(_dw)) & 0xffff))

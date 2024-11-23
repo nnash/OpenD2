@@ -89,7 +89,7 @@ namespace Sys
 		free(addresses);
 		D2Lib::qsnprintf(szAddress, 32, u"0.0.0.0");
 		return szAddress;*/
-		return u"192.168.1.1";
+		return (char16_t*)&u"192.168.1.1";
 	}
 
 	/*

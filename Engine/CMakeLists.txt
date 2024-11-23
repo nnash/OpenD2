@@ -58,41 +58,43 @@ set(ENGINE_SRC
 
 # TODO figure this out
 if(WIN32)
-	set(STATIC_LIBRARIES dbghelp.lib psapi.lib)
+  set(STATIC_LIBRARIES dbghelp.lib psapi.lib)
 endif()
 
+
+file(GLOB_RECURSE ADPCM_SRC ../Libraries/adpcm/*)
+file(GLOB_RECURSE HUFFMAN_SRC ../Libraries/huffman/*)
+file(GLOB_RECURSE PKWARE_SRC ../Libraries/pkware/*)
+
+source_group("Libraries\\adpcm" FILES ${ADPCM_SRC})
+source_group("Libraries\\huffman" FILES ${HUFFMAN_SRC})
+source_group("Libraries\\pkware" FILES ${PKWARE_SRC})
+
+set(LIBRARY_SRC ${ADPCM_SRC} ${HUFFMAN_SRC} ${PKWARE_SRC})
+
+message(STATUS "Library SRC ${LIBRARY_SRC}")
 if(WIN32)
   set(ENGINE_SRC
       "${ENGINE_SRC}"
       Platform_Windows.cpp
   )
-  
-  file(GLOB_RECURSE ADPCM_SRC ../Libraries/adpcm/*)
-  file(GLOB_RECURSE HUFFMAN_SRC ../Libraries/huffman/*)
-  file(GLOB_RECURSE PKWARE_SRC ../Libraries/pkware/*)
-  
-  source_group("Engine" FILES ${ENGINE_SRC})
-  source_group("Libraries\\adpcm" FILES ${ADPCM_SRC})
-  source_group("Libraries\\huffman" FILES ${HUFFMAN_SRC})
-  source_group("Libraries\\pkware" FILES ${PKWARE_SRC})
-  
-  set(LIBRARY_SRC ${ADPCM_SRC} ${HUFFMAN_SRC} ${PKWARE_SRC})
 else()
   set(ENGINE_SRC
       "${ENGINE_SRC}"
       Platform_Linux.cpp
   )
-
-  source_group("Engine" FILES ${ENGINE_SRC})
 endif()
 
+source_group("Engine" FILES ${ENGINE_SRC})
+
 find_package(SDL2_mixer REQUIRED)
+find_package(SDL2_net REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(glew REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
-add_executable(game ${ENGINE_SRC} ${SHARED_SRC} ${LIBRARY_SRC})
+add_executable(game ${LIBRARY_SRC} ${ENGINE_SRC} )
 
 set_target_properties(game PROPERTIES OUTPUT_NAME game)
 set_target_properties(game PROPERTIES LINKER_LANGUAGE CXX)
@@ -100,10 +102,16 @@ set_target_properties(game PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(game 
                       PRIVATE
                       SDL2_mixer::SDL2_mixer
+                      SDL2_net::SDL2_net
                       SDL2::SDL2
                       GLEW::GLEW
                       glfw
                       glm::glm
+)
+
+target_link_libraries(game
+                      PRIVATE
+                      D2Shared
 )
 
 if(WIN32)

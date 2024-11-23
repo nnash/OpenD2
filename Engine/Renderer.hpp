@@ -1,5 +1,7 @@
 #pragma once
-#include "Diablo2.hpp"
+// #include "Diablo2.hpp"
+#include "../Shared/D2Shared.hpp"
+#include <SDL.h>
 
 // The render targets
 enum OpenD2RenderTargets

@@ -246,7 +246,7 @@ void DumpHuffmannTree(THTreeItem * pItem)
 
     // Get the lower-weight branch
     pChildLo = pItem->pChildLo;
-    if(pChildLo != NULL)
+    if(pChildLo != nullptr)
     {
         // Get the higher-weight branch
         pChildHi = pChildLo->pPrev;
@@ -392,11 +392,11 @@ void TOutputStream::Flush()
 
 void THTreeItem::RemoveItem()
 {
-    if(pNext != NULL)
+    if(pNext != nullptr)
     {
         pPrev->pNext = pNext;
         pNext->pPrev = pPrev;
-        pNext = pPrev = NULL;
+        pNext = pPrev = nullptr;
     }
 }
 
@@ -440,7 +440,7 @@ void THuffmannTree::InsertItem(THTreeItem * pNewItem, TInsertPoint InsertPoint, 
     // Remove the item from the tree
     pNewItem->RemoveItem();
  
-    if(pInsertPoint == NULL)
+    if(pInsertPoint == nullptr)
         pInsertPoint = LIST_HEAD();
 
     switch(InsertPoint)
@@ -461,7 +461,7 @@ void THuffmannTree::InsertItem(THTreeItem * pNewItem, TInsertPoint InsertPoint, 
 THTreeItem * THuffmannTree::FindHigherOrEqualItem(THTreeItem * pItem, unsigned int Weight)
 {
     // Parse all existing items
-    if(pItem != NULL)
+    if(pItem != nullptr)
     {
         while(pItem != LIST_HEAD())
         {
@@ -484,13 +484,13 @@ THTreeItem * THuffmannTree::CreateNewItem(unsigned int DecompressedValue, unsign
     pNewItem = &ItemBuffer[ItemsUsed++];
 
     // Insert this item to the top of the tree
-    InsertItem(pNewItem, InsertPoint, NULL);
+    InsertItem(pNewItem, InsertPoint, nullptr);
 
     // Fill the rest of the item
     pNewItem->DecompressedValue = DecompressedValue;
     pNewItem->Weight = Weight;
-    pNewItem->pParent = NULL;
-    pNewItem->pChildLo = NULL;
+    pNewItem->pParent = nullptr;
+    pNewItem->pChildLo = nullptr;
     return pNewItem;
 }
 
@@ -593,7 +593,7 @@ void THuffmannTree::IncWeightsAndRebalance(THTreeItem * pItem)
     THTreeItem * pParent;
  
     // Climb up the tree and increment weight of each tree item
-    for(; pItem != NULL; pItem = pItem->pParent)
+    for(; pItem != nullptr; pItem = pItem->pParent)
     {
         // Increment the item's weight
         pItem->Weight++;
@@ -658,7 +658,7 @@ void THuffmannTree::EncodeOneByte(TOutputStream * os, THTreeItem * pItem)
     unsigned int BitCount = 0;
 
     // Put 1's as long as there is parent
-    while(pParent != NULL)
+    while(pParent != nullptr)
     {
         // Fill the bit buffer
         BitBuffer = (BitBuffer << 1) | ((pParent->pChildLo != pItem) ? 1 : 0);
@@ -675,7 +675,7 @@ void THuffmannTree::EncodeOneByte(TOutputStream * os, THTreeItem * pItem)
 
 unsigned int THuffmannTree::DecodeOneByte(TInputStream * is)
 {
-    THTreeItem * pItemLink = NULL;
+    THTreeItem * pItemLink = nullptr;
     THTreeItem * pItem;
     unsigned int ItemLinkIndex;
     unsigned int BitCount = 0;
@@ -713,7 +713,7 @@ unsigned int THuffmannTree::DecodeOneByte(TInputStream * is)
     }
 
     // Step down the tree until we find a terminal item
-    while(pItem->pChildLo != NULL)
+    while(pItem->pChildLo != nullptr)
     {
         // If the next bit in the compressed stream is set, we get the higher-weight
         // child. Otherwise, get the lower-weight child.
@@ -781,7 +781,7 @@ unsigned int THuffmannTree::Compress(TOutputStream * os, void * pvInBuffer, int 
         InputByte = *pbInBuffer++;
 
         // Do we have an item for such input value?
-        if(ItemsByByte[InputByte] == NULL)
+        if(ItemsByByte[InputByte] == nullptr)
         {
             // Encode the relationship
             EncodeOneByte(os, ItemsByByte[0x101]);
@@ -826,7 +826,7 @@ unsigned int THuffmannTree::Decompress(void * pvOutBuffer, unsigned int cbOutLen
     unsigned int DecompressedValue = 0;
     unsigned int CompressionType = 0;
    
-    // Test the output length. Must not be NULL.
+    // Test the output length. Must not be nullptr.
     if(cbOutLength == 0)
         return 0;
  

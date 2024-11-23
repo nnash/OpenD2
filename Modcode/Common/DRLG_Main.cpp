@@ -1,6 +1,8 @@
 #include "D2Common.hpp"
 #include "DRLG.hpp"
 
+#include <cstdio>
+
 D2COMMONAPI void D2Common_ConstructWorld()
 {
 	

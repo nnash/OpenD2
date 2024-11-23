@@ -9,10 +9,11 @@
 /* 03.05.03  2.00  Lad  Added compression                                    */
 /* 08.12.03  2.01  Dan  High-memory handling (> 0x80000000)                  */
 /*****************************************************************************/
- 
+#pragma once 
 #ifndef __HUFFMAN_H__
 #define __HUFFMAN_H__
 
+#include <cstddef>
 //-----------------------------------------------------------------------------
 // Defines
  
@@ -67,7 +68,7 @@ enum TInsertPoint
 // Huffmann tree item
 struct THTreeItem
 {
-    THTreeItem()    { pPrev = pNext = NULL; DecompressedValue = 0; Weight = 0; pParent = pChildLo = NULL; }
+    THTreeItem()    { pPrev = pNext = nullptr; DecompressedValue = 0; Weight = 0; pParent = pChildLo = nullptr; }
 //  ~THTreeItem()   { RemoveItem(); }
 
     void         RemoveItem();
@@ -77,7 +78,7 @@ struct THTreeItem
     THTreeItem  * pPrev;                // Pointer to higher-weight item
     unsigned int  DecompressedValue;    // 08 - Decompressed byte value (also index in the array)
     unsigned int  Weight;               // 0C - Weight
-    THTreeItem  * pParent;              // 10 - Pointer to parent item (NULL if none)
+    THTreeItem  * pParent;              // 10 - Pointer to parent item (nullptr if none)
     THTreeItem  * pChildLo;             // 14 - Pointer to the child with lower-weight child ("left child")
 };
 
