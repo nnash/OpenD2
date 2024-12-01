@@ -4,6 +4,8 @@
 #include "Renderer.hpp"
 #include <assert.h>
 
+#include <SDL.h>
+
 ///////////////////////////////////////////////////////
 //
 //	Diablo II (OpenD2) Window Management Code
@@ -18,23 +20,25 @@ namespace Window
 	static SDL_Window* CreateWindow(D2GameConfigStrc* pConfig, OpenD2ConfigStrc* pOpenConfig)
 	{
 		SDL_Window* pWin = nullptr;
-		DWORD dwWindowFlags = 0;
+		DWORD dwWindowFlags = SDL_WINDOW_SHOWN;
 
 		if (!pConfig->bWindowed)
 		{
 			dwWindowFlags |= SDL_WINDOW_FULLSCREEN;
 		}
+
 		if (pOpenConfig->bBorderless)
 		{
 			dwWindowFlags |= SDL_WINDOW_BORDERLESS;
 		}
+
 		if (pConfig->bOpenGL)
 		{
 			dwWindowFlags |= SDL_WINDOW_OPENGL;
 		}
 
 		// TODO: make the size based on resolution
-		pWin = SDL_CreateWindow("Diablo II", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, dwWindowFlags);
+		pWin = SDL_CreateWindow("Diablo II", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1440, 900, dwWindowFlags);
 
 		return pWin;
 	}
@@ -44,6 +48,7 @@ namespace Window
 	 */
 	void InitSDL(D2GameConfigStrc* pConfig, OpenD2ConfigStrc* pOpenConfig)
 	{
+	  SDL_SetHint(SDL_HINT_VIDEODRIVER, "x11");
 		SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS | SDL_INIT_TIMER);
 
 		gpWindow = CreateWindow(pConfig, pOpenConfig);
