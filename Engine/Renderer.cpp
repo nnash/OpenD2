@@ -1,5 +1,6 @@
 #include "Renderer.hpp"
 #include "Renderer_GL.hpp"
+#include "Renderer_SDL.hpp"
 #include "Palette.hpp"
 #include "DCC.hpp"
 
@@ -29,14 +30,14 @@ namespace Renderer
 		OpenD2RenderTargets DesiredRenderTarget = OD2RT_SDL;
 
 		// Determine which render target to go with
-		if (pConfig->bOpenGL || pConfig->bD3D || pOpenConfig->bNoSDLAccel)
-		{
-			DesiredRenderTarget = OD2RT_OPENGL;
-		}
-		else
-		{
-			DesiredRenderTarget = OD2RT_SDL;
-		}
+		// if (pConfig->bOpenGL || pConfig->bD3D || pOpenConfig->bNoSDLAccel)
+		// {
+		// 	DesiredRenderTarget = OD2RT_OPENGL;
+		// }
+		// else
+		// {
+		// 	DesiredRenderTarget = OD2RT_SDL;
+		// }
 
 		// Load palettes
 		Pal::Init();
@@ -48,11 +49,10 @@ namespace Renderer
 			case OD2RT_OPENGL:
 				RenderTarget = new Renderer_GL(pConfig, pOpenConfig, pWindow);
 				break;
-#if 0	// no longer available
+	// no longer available
 			case OD2RT_SDL:
 				RenderTarget = new Renderer_SDL(pConfig, pOpenConfig, pWindow);
 				break;
-#endif
 		}
 	}
 

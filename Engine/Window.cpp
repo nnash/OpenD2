@@ -38,7 +38,7 @@ namespace Window
 		}
 
 		// TODO: make the size based on resolution
-		pWin = SDL_CreateWindow("Diablo II", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1440, 900, dwWindowFlags);
+		pWin = SDL_CreateWindow("Diablo II", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1440, 900, 0);
 
 		if (pWin == nullptr) {
 			const char* buffer = SDL_GetError();
