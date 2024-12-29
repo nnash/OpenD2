@@ -42,6 +42,9 @@ D2.ini
 game
 mpqs/*
 
+# Conan
+conan/deps/*
+
 # CMake
 CMakeCache.txt
 CMakeFiles
