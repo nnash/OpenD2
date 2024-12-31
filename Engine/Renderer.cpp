@@ -1,6 +1,5 @@
 #include "Renderer.hpp"
 #include "Renderer_GL.hpp"
-#include "Renderer_SDL.hpp"
 #include "Palette.hpp"
 #include "DCC.hpp"
 
@@ -19,39 +18,28 @@
 
 IRenderer* RenderTarget = nullptr;
 
-namespace Renderer
-{
+namespace Renderer {
 	/*
 	 *	Initializes the renderer.
 	 *	Call after the window has been created.
 	 */
-	void Init(D2GameConfigStrc* pConfig, OpenD2ConfigStrc* pOpenConfig, SDL_Window* pWindow)
-	{
-		OpenD2RenderTargets DesiredRenderTarget = OD2RT_SDL;
+	void Init(D2GameConfigStrc* pConfig, OpenD2ConfigStrc* pOpenConfig, SDL_Window* pWindow) {
+		OpenD2RenderTargets DesiredRenderTarget = OD2RT_OPENGL;
 
 		// Determine which render target to go with
 		// if (pConfig->bOpenGL || pConfig->bD3D || pOpenConfig->bNoSDLAccel)
 		// {
 		// 	DesiredRenderTarget = OD2RT_OPENGL;
 		// }
-		// else
-		// {
-		// 	DesiredRenderTarget = OD2RT_SDL;
-		// }
 
 		// Load palettes
 		Pal::Init();
 		DCC::GlobalInit();
 
-		switch (DesiredRenderTarget)
-		{
+		switch (DesiredRenderTarget) {
 			default:
 			case OD2RT_OPENGL:
 				RenderTarget = new Renderer_GL(pConfig, pOpenConfig, pWindow);
-				break;
-	// no longer available
-			case OD2RT_SDL:
-				RenderTarget = new Renderer_SDL(pConfig, pOpenConfig, pWindow);
 				break;
 		}
 	}

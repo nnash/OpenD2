@@ -1063,10 +1063,6 @@ void Renderer_GL::Remove(IRenderObject* Object)
 
 Renderer_GL::Renderer_GL(D2GameConfigStrc * pConfig, OpenD2ConfigStrc * pOpenConfig, SDL_Window * pWindow)
 {
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
 	DrawList = new GLRenderObject**[RenderProgram_NumPrograms];
 	for (int i = 0; i < RenderProgram_NumPrograms; i++)
 	{

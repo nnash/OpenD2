@@ -85,7 +85,8 @@ The clientside is responsible for client logic, mostly with drawing the menus an
 
 ## Conan
 build for linux:
-`conan install ./conan --output-folder=build/conan --profile:build=./conan/default --profile:host=./conan/default --build=missing`
+`conan install ./conan --output-folder=./conan/deps --profile:build=./conan/profiles/default --profile:host=./conan/profiles/default --build=missing`
 
-
+### Cmake command
+`cmake -H. -Bbuild -G'Unix Makefiles' -DCMAKE_TOOLCHAIN_FILE=./conan/deps/conan_toolchain.cmake -DCMAKE_POLICY_CMP0091=NEW -DCMAKE_BUILD_TYPE=Release`
 fix for void * in 64 bit: https://stackoverflow.com/questions/21232460/disabling-cast-from-pointer-to-smaller-type-uint32-t-error-in-clang

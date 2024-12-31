@@ -35,10 +35,13 @@ namespace Window
 		if (pConfig->bOpenGL)
 		{
 			dwWindowFlags |= SDL_WINDOW_OPENGL;
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 		}
 
 		// TODO: make the size based on resolution
-		pWin = SDL_CreateWindow("Diablo II", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1440, 900, 0);
+		pWin = SDL_CreateWindow("Diablo II", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1440, 900, dwWindowFlags);
 
 		if (pWin == nullptr) {
 			const char* buffer = SDL_GetError();
@@ -54,7 +57,6 @@ namespace Window
 	 */
 	void InitSDL(D2GameConfigStrc* pConfig, OpenD2ConfigStrc* pOpenConfig)
 	{
-	  SDL_SetHint(SDL_HINT_VIDEODRIVER, "x11");
 		SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS | SDL_INIT_TIMER);
 
 		gpWindow = CreateWindow(pConfig, pOpenConfig);

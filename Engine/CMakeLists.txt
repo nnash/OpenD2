@@ -43,7 +43,6 @@ set(ENGINE_SRC
     Platform.hpp
     Renderer_GL.cpp
     Renderer_GL.hpp
-    Renderer_SDL.hpp
     Renderer.cpp
     Renderer.hpp
     TBL_Font.cpp
